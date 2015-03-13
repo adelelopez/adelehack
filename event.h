@@ -4,7 +4,7 @@
 
 class Object;
 
-enum Action {WAIT, MOVE};
+enum Action {WAIT, MOVE, PICK_UP};
 
 struct event {
    std::shared_ptr<Object> subject;

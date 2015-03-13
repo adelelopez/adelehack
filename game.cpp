@@ -29,6 +29,19 @@ Outcome Game::move(std::shared_ptr<Object> subject, coord destination) {
    return transfer(subject, at[subject->location], at[destination]);
 }
 
+Outcome Game::pick_up(std::shared_ptr<Object> subject) {
+   // TODO: overload transfer with versions that can transfer the entire
+   // inventory, and later versions that can sort to transfer specific
+   // types of items
+   auto& this_place = subject->location;
+   for (auto item : at[this_place]->inventory) 
+      if (item->is(CARRYABLE))
+         // just pick up the top item
+         return transfer(item, at[this_place], subject);
+   
+   return FAIL;
+}
+
 Outcome Game::spawn(std::shared_ptr<Object> subject, coord location) {
    subject->location = location;
    items.push_back(subject);
@@ -48,6 +61,8 @@ void Game::process_event(std::shared_ptr<Object> thing, event &e) {
    case MOVE:
       move(thing, e.end);
       break;
+   case PICK_UP:
+      pick_up(thing);
    case WAIT:
    default:  break;
    }

@@ -24,6 +24,7 @@ class Game {
    Outcome transfer(std::shared_ptr<Object>,
                     std::shared_ptr<Object>,
                     std::shared_ptr<Object>);
+   Outcome pick_up(std::shared_ptr<Object>);
    Outcome move(std::shared_ptr<Object>, coord);
    Outcome spawn(std::shared_ptr<Object>, coord);
 

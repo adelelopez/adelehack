@@ -44,6 +44,7 @@ event Player::action(int input) {
       return try_to(MOVE, UPRIGHT);
 
    case ',':
+      return try_to(PICK_UP);
       break;
    }
    return try_to(WAIT);
