@@ -12,6 +12,8 @@ event Monster::action(int input) {
 Player::Player() {
    symbol = '@';
    color = MAGENTA;
+   msg[MOVE][FAIL] = "Ouch!";
+   msg[PICK_UP][SUCCESS] = "You got it!";
 }
 
 event Player::action(int input) {

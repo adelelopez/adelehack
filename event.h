@@ -5,6 +5,7 @@
 class Object;
 
 enum Action {WAIT, MOVE, PICK_UP};
+enum Outcome {SUCCESS, FAIL};
 
 struct event {
    std::shared_ptr<Object> subject;
@@ -12,7 +13,5 @@ struct event {
    Action action;
    coord start;
    coord end;
-   std::string success_msg;
-   std::string fail_msg;
 };
 

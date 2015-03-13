@@ -30,8 +30,9 @@ class Game {
 
    // events
    void take_turn();
-   void process_event(std::shared_ptr<Object>, event &);
+   Outcome process_event(std::shared_ptr<Object>, event);
 
+   void message(std::string);
 public:
    Game();
 

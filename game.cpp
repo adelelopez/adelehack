@@ -34,11 +34,11 @@ Outcome Game::pick_up(std::shared_ptr<Object> subject) {
    // inventory, and later versions that can sort to transfer specific
    // types of items
    auto& this_place = subject->location;
-   for (auto item : at[this_place]->inventory) 
+   for (auto item : at[this_place]->inventory)
       if (item->is(CARRYABLE))
          // just pick up the top item
          return transfer(item, at[this_place], subject);
-   
+
    return FAIL;
 }
 
@@ -50,22 +50,28 @@ Outcome Game::spawn(std::shared_ptr<Object> subject, coord location) {
 }
 
 void Game::take_turn() {
+   ::move(7,0);
+   clrtoeol();
    for (auto& thing : items) {
       auto e = thing->action(input);
-      process_event(thing, e);
+      message(thing->msg[e.action][process_event(thing, e)]);
    }
 }
 
-void Game::process_event(std::shared_ptr<Object> thing, event &e) {
+Outcome Game::process_event(std::shared_ptr<Object> thing, event e) {
    switch (e.action) {
    case MOVE:
-      move(thing, e.end);
-      break;
+      return move(thing, e.end);
    case PICK_UP:
-      pick_up(thing);
+      return pick_up(thing);
    case WAIT:
-   default:  break;
+   default:  return SUCCESS;
    }
+}
+
+void Game::message(std::string str) {
+   ::move(7,0);
+   addstr(str.c_str());
 }
 
 void Game::display() {

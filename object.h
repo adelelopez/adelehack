@@ -4,7 +4,6 @@
 
 enum Color {GRAY, BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE};
 enum Flag {WALKABLE, CARRYABLE};
-enum Outcome {SUCCESS, FAIL};
 enum State {WEIGHT};
 
 class Object : public std::enable_shared_from_this<Object> {
@@ -21,6 +20,8 @@ public:
    char symbol;
    coord location;
    Color color;
+
+   std::map<Action, std::map<Outcome, std::string>> msg;
 
    //std::shared_ptr<Object> owner;
    std::list<std::shared_ptr<Object>> inventory;
