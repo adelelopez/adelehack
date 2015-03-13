@@ -55,4 +55,5 @@ event Player::action(int input) {
 Feline::Feline() {
    symbol = 'f';
    color = YELLOW;
+   msg[MOVE][FAIL] = "meow";
 }

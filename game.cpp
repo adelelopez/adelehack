@@ -50,6 +50,7 @@ Outcome Game::spawn(std::shared_ptr<Object> subject, coord location) {
 }
 
 void Game::take_turn() {
+   // clear message line
    ::move(7,0);
    clrtoeol();
    for (auto& thing : items) {
