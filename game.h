@@ -3,6 +3,7 @@
 #include "monster.h"
 #include "place.h"
 #include "level.h"
+#include "item.h"
 
 class Game {
    // environment
@@ -20,12 +21,15 @@ class Game {
    std::map<coord, std::shared_ptr<Place>> at;
 
    // verbs
+   Outcome transfer(std::shared_ptr<Object>,
+                    std::shared_ptr<Object>,
+                    std::shared_ptr<Object>);
    Outcome move(std::shared_ptr<Object>, coord);
    Outcome spawn(std::shared_ptr<Object>, coord);
 
    // events
    void take_turn();
-   void process_event(std::shared_ptr<Object> thing, event &e);
+   void process_event(std::shared_ptr<Object>, event &);
 
 public:
    Game();

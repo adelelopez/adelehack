@@ -6,22 +6,27 @@ Game::Game() {
    player = std::make_shared<Player>();
    spawn(player, {1, 1});
    spawn(std::make_shared<Feline>(), {1, 3});
-   spawn(std::make_shared<Feline>(), {1, 4});
+   spawn(std::make_shared<Money>(), {3, 4});
+}
+
+Outcome Game::transfer(std::shared_ptr<Object> object,
+                       std::shared_ptr<Object> old_owner,
+                       std::shared_ptr<Object> new_owner) {
+   auto& here = old_owner->inventory;
+   auto is_here = std::find(here.begin(), here.end(), object);
+   if (is_here != here.end()) {
+      new_owner->inventory.splice(new_owner->inventory.end(), here, is_here);
+      object->location = new_owner->location;
+      return SUCCESS;
+   }
+   return FAIL;
 }
 
 Outcome Game::move(std::shared_ptr<Object> subject, coord destination) {
    if (!at[destination]->is_clear())
       return FAIL;
 
-   auto& here = at[subject->location]->inventory;
-   auto is_here = std::find(here.begin(), here.end(), subject);
-   if (is_here != here.end()) {
-      at[destination]->inventory.splice(at[destination]->inventory.end(), here, is_here);
-      subject->location = destination;
-      subject->owner = at[destination];
-      return SUCCESS;
-   }
-   return FAIL;
+   return transfer(subject, at[subject->location], at[destination]);
 }
 
 Outcome Game::spawn(std::shared_ptr<Object> subject, coord location) {

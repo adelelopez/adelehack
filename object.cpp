@@ -26,7 +26,7 @@ event Object::try_to(Action a, Direction dir) {
 }
 
 void Object::hold(std::shared_ptr<Object> subject) {
-   subject->owner = shared_from_this();
+   //subject->owner = shared_from_this();
    subject->location = location;
    inventory.push_back(subject);
 }

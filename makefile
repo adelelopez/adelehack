@@ -7,7 +7,7 @@ LFLAGS = -Wall $(DEBUG)
 adelehack : $(OBJS) main.cpp
 	$(CC) $(LFLAGS) $(OBJS) main.cpp -lncurses -o adelehack 
 
-game.o : game.h game.cpp level.h place.h monster.h object.h coord.h event.h
+game.o : game.h game.cpp level.h place.h monster.h object.h coord.h event.h item.h
 	$(CC) $(CFLAGS) game.cpp
 
 object.o : object.h object.cpp coord.h event.h

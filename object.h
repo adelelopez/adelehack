@@ -22,7 +22,7 @@ public:
    coord location;
    Color color;
 
-   std::shared_ptr<Object> owner;
+   //std::shared_ptr<Object> owner;
    std::list<std::shared_ptr<Object>> inventory;
 
    bool& is(Flag f) { return flag[f]; }
